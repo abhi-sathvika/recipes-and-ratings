@@ -3,7 +3,7 @@
 ## Introduction
 The dataset being analyzed contains detailed information about recipes from a popular online platform, offering a rich repository of culinary data. Each recipe is described by various attributes, including the number of steps required, the ingredients involved, the time needed to prepare, and its average rating by users. This dataset allows us to delve into user preferences and explore what factors make a recipe more appealing.
 
-### Project Focus: The Central Question
+### Project Focus:
 Our project focuses on answering this central question:
 **"What is the relationship between the number of steps in a recipe and its average user rating?"**
 This question is intriguing because it sheds light on how complexity in recipe preparation might influence user satisfaction. Does a simple recipe garner more favorable reviews, or do users appreciate the effort and detail of a complex recipe? Answering this can benefit chefs, culinary websites, and anyone looking to optimize recipe creation for higher ratings.
