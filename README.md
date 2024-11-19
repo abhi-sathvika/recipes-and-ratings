@@ -17,10 +17,10 @@ Consumers: Understanding these patterns helps readers find recipes that are more
 For our analysis, we used two datasets, recipes and interactions. 
 
 Relevant columns:
-n_steps: The number of steps required to prepare the recipe. This reflects the recipe's complexity.
-avg_rating: The average user rating of the recipe, a measure of its popularity and perceived quality.
-minutes: The total preparation time for the recipe, providing context to its complexity.
+- n_steps: The number of steps required to prepare the recipe. This reflects the recipe's complexity.
+- avg_rating: The average user rating of the recipe, a measure of its popularity and perceived quality.
+- minutes: The total preparation time for the recipe, providing context to its complexity.
 
 ### Datasets Used
-Recipes: 83782 rows, 12 columns
-Interactions: 731927 rows, 5 columns
+- Recipes: 83782 rows, 12 columns
+- Interactions: 731927 rows, 5 columns
