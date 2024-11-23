@@ -1,4 +1,4 @@
-# Recipe Analytics: Linking Complexity and User Ratings for Culinary Insights 
+# Recipe Analytics: Linking Recipe Complexity and User Ratings for Culinary Insights 
 
 Authors: Preethi Manne & Abhi Sathvika Goriparthy
 
@@ -49,3 +49,43 @@ Relevant columns:
 | `'date'`      | Date of interaction |
 | `'rating'`    | Rating given        |
 | `'review'`    | Review text         |
+
+
+## Data Cleaning and Exploratory Data Analysis
+
+We conducted the following data cleaning steps:
+
+1. Left merge the recipes and interactions datasets on id and recipe_id.
+
+   - The purpose of this step is to helps match the unique recipes with their rating and review. We did a left merge specifically to get all the recipes in the recipes dataset.
+
+1. Checked data types of all the columns.
+
+   - The purpose of this step is to help evaluate what data cleaning steps and data type conversion are needed.
+   - | Column             | Description |
+     | :----------------- | :---------- |
+     | `'name'`           | object      |
+     | `'id'`             | int64       |
+     | `'minutes'`        | int64       |
+     | `'contributor_id'` | int64       |
+     | `'submitted'`      | object      |
+     | `'tags'`           | object      |
+     | `'nutrition'`      | object      |
+     | `'n_steps'`        | int64       |
+     | `'steps'`          | object      |
+     | `'description'`    | object      |
+     | `'ingredients'`    | object      |
+     | `'n_ingredients'`  | int64       |
+     | `'user_id'`        | float64     |
+     | `'recipe_id'`      | float64     |
+     | `'date'`           | object      |
+     | `'rating'`         | float64     |
+     | `'review'`         | object      |
+
+1. Filled all ratings of 0 with np.nan.
+
+   - Rating is typicaly on a scale from 1 to 5. 1 represents the lowest rating, while 5 represents the highest rating. Leaving missing ratings as is would affect the average rating column. While computing the average, the denominator would be higher, while the numerator would just add a 0, not changing it. So this would make the average smaller than it should be. Therfore, we repalce all the ratings of 0 with np.nan.
+
+1. Added column `'average_rating'` containing average rating per recipe.
+
+   - A recipe's overall rating is determined by averaging the ratings provided by multiple users, offering a more comprehensive evaluation of its quality.
