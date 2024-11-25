@@ -145,4 +145,7 @@ This table shows the relationships between step levels and ratings, such as whet
 
 - ‘Rating’ is a column that is Not Missing At Random (NMAR). This is because if people felt really strongly about a specific recipe, they are more likely to report their rating. On the other hand, if people do not have a strong opinion about a recipe, they are more likely to not share their rating. Therefore, the rating column is dependent on its own value. 
 - Additional data that we can collect to make the missingness of ‘rating’ MAR is the popularity of the recipe. For example, we can collect the number of views for that recipe. The higher the number of views, the more likely people have tried and rated a recipe and vice versa. Therefore, the missingness of ‘rating” is dependent on an entirely different column, “popularity of recipe”.
+- 
+
+<iframe src="assets/n-steps-missing-dependency.html" width="800" height="600" frameborder="0"></iframe>
 
