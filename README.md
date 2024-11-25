@@ -115,3 +115,9 @@ We conducted the following data cleaning steps:
 
 Analysis: This histogram displays the distribution of number of steps in recipes, showing a significant concentration of ratings near 10-15 steps. The trend indicates that most entities have fewer steps, while recipes with many steps are relatively rare, suggesting a right skew in the data.
 
+### Bivariate Graph Analysis
+
+<iframe src="assets/n-steps-bivariate-distribution.html" width="800" height="600" frameborder="0"></iframe>
+
+Analysis: Fill in
+
