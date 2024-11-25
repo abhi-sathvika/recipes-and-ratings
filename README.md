@@ -149,3 +149,5 @@ This table shows the relationships between step levels and ratings, such as whet
 
 <iframe src="assets/n-steps-missing-dependency.html" width="800" height="600" frameborder="0"></iframe>
 
+<iframe src="assets/minutes-missing-dependency.html" width="800" height="600" frameborder="0"></iframe>
+
