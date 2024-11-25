@@ -121,5 +121,14 @@ Analysis: This histogram displays the distribution of number of steps in recipes
 
 Analysis: The graph shows that the recipes with ratings 3 and 4 have lower number of steps, while the recipes with ratings 1, 2, and 5 have higher number of steps. This suggests that typically recipes with fewer number of steps tend to have higher ratings and vice versa. 
 
+### Interesting Aggregates
+
+| Steps_Bin   |   Average_Rating_Mean |   Count |   Rating_StdDev |
+|:------------|----------------------:|--------:|----------------:|
+| 0-10        |               4.62423 |   51793 |        0.632202 |
+| 10-20       |               4.6232  |   26641 |        0.65224  |
+| 20-30       |               4.63654 |    4199 |        0.671727 |
+| 30-40       |               4.68632 |     716 |        0.637707 |
+
 
 
