@@ -109,6 +109,6 @@ We conducted the following data cleaning steps:
 
 
 
-<iframe src="assets/avg_rating_distribution.html" width=800 height=600 frameborder=0></iframe>
+<iframe src="assets/avg_rating_distribution.html" width="800" height="600" frameborder="0"></iframe>
 
 
