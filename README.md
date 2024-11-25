@@ -147,7 +147,7 @@ This table shows the relationships between step levels and ratings, such as whet
 - Additional data that we can collect to make the missingness of ‘rating’ MAR is the popularity of the recipe. For example, we can collect the number of views for that recipe. The higher the number of views, the more likely people have tried and rated a recipe and vice versa. Therefore, the missingness of ‘rating” is dependent on an entirely different column, “popularity of recipe”.
 - 
 
-<iframe src="assets/n-steps-missing-dependency.html" width="800" height="600" frameborder="0"></iframe>
+<iframe src="assets/nsteps-missing-dependency.html" width="800" height="600" frameborder="0"></iframe>
 
 <iframe src="assets/minutes-missing-dependency.html" width="800" height="600" frameborder="0"></iframe>
 
