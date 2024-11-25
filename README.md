@@ -150,13 +150,13 @@ This table shows the relationships between step levels and ratings, such as whet
 
 ### Rating on n_steps:
 
--**Null Hypothesis**: Rating is not MAR dependent on the n_steps column.
+- **Null Hypothesis**: Rating is not MAR dependent on the n_steps column.
 
--**Alternative Hypothesis**: Rating is MAR dependent on the n_steps column.
+- **Alternative Hypothesis**: Rating is MAR dependent on the n_steps column.
 
--**Test Statistic**: Difference in means
+- **Test Statistic**: Difference in means
 
--**Results**: The results show a p-value of 0.0, which is less than the significance level at 0.05. Since the p-value is extremely small, we can reject the null hypothesis, so Rating is MAR dependent on the n_steps column.
+- **Results**: The results show a p-value of 0.0, which is less than the significance level at 0.05. Since the p-value is extremely small, we can reject the null hypothesis, so Rating is MAR dependent on the n_steps column.
 
 
 <iframe src="assets/nsteps-missing-dependency.html" width="800" height="600" frameborder="0"></iframe>
@@ -165,13 +165,13 @@ This table shows the relationships between step levels and ratings, such as whet
 
 ### Rating on minutes
 
--**Null Hypothesis**: Rating is not MAR dependent on the minutes column.
+- **Null Hypothesis**: Rating is not MAR dependent on the minutes column.
 
--**Alternative Hypothesis**: Rating is MAR dependent on the minutes column.
+- **Alternative Hypothesis**: Rating is MAR dependent on the minutes column.
 
--**Test Statistic**: Difference in means
+- **Test Statistic**: Difference in means
 
--**Results**: The results show a p-value of 0.06, which is greater than the significance level at 0.05. Since the p-value is greater, we can fail to reject the null hypothesis of, so Rating is not MAR dependent on the minutes column.
+- **Results**: The results show a p-value of 0.06, which is greater than the significance level at 0.05. Since the p-value is greater, we can fail to reject the null hypothesis of, so Rating is not MAR dependent on the minutes column.
 
 
 <iframe src="assets/minutes-missing-dependency.html" width="800" height="600" frameborder="0"></iframe>
