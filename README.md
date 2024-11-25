@@ -119,5 +119,7 @@ Analysis: This histogram displays the distribution of number of steps in recipes
 
 <iframe src="assets/n-steps-bivariate-distribution.html" width="800" height="600" frameborder="0"></iframe>
 
-Analysis: Fill in
+Analysis: The graph shows that the recipes with ratings 3 and 4 have lower number of steps, while the recipes with ratings 1, 2, and 5 have higher number of steps. This suggests that typically recipes with fewer number of steps tend to have higher ratings and vice versa. 
+
+
 
