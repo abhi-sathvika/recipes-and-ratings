@@ -192,3 +192,6 @@ This table shows the relationships between step levels and ratings, such as whet
 
 - **Justification**: We chose the difference in means between the two groups as our test statistic because we are interested in comparing the central tendencies of the ratings for recipes with fewer steps (0-20) versus those with more steps (20-40). The observed difference in means is −0.0197. A permutation test is appropriate in this case because we do not have any information about the population distribution, and we aim to assess whether the observed difference could have occurred by chance under the null hypothesis. The practical purpose of this analysis is to help people make informed decisions when selecting recipes. If a recipe has a high number of steps, its rating could influence whether someone decides to try it. For instance, if a complex recipe with many steps has a high rating, people might feel more motivated to follow it, trusting that the effort is worthwhile. Conversely, if the rating is low, they may opt for simpler alternatives. Understanding this relationship can guide users toward recipes that best match their preferences and willingness to invest time.
 
+
+
+## Framing a Prediction Problem 
