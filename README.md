@@ -137,5 +137,5 @@ This pivot table summarizes the data by grouping the "Number_of_Steps" column in
 - **Count**: Indicates the number of entries (or observations) in each bin, reflecting the distribution of data across step ranges.
 - **Rating_StdDev**: Displays the standard deviation of ratings within each bin, highlighting the variability or consistency of ratings for a given step range.
 
-- This table allows you to analyze trends and relationships between step levels and ratings, such as whether higher step counts are associated with better ratings and if certain bins have more consistent feedback.
+This table shows the relationships between step levels and ratings, such as whether higher step counts are associated with better ratings and if certain bins have more consistent feedback.
 
