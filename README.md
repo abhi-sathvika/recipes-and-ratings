@@ -108,3 +108,12 @@ We conducted the following data cleaning steps:
 | 007  martini                         | 429524 |         5 |           599450 | 2010-06-12  |         4 |               4 |      429524 | 2012-08-20 |      5       | 0-10        |
 
 
+
+<iframe
+  src="assets/avg_rating_distribution.html"
+  width=800
+  height=600
+  frameborder=0
+></iframe>
+
+
