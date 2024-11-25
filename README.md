@@ -109,6 +109,9 @@ We conducted the following data cleaning steps:
 
 
 
+### Univariate Graph Analysis
+
 <iframe src="assets/avg-rating-distribution.html" width="800" height="600" frameborder="0"></iframe>
 
+Analysis: This histogram displays the distribution of average ratings, showing a significant concentration of ratings near 5. The trend indicates that most entities have high average ratings, while lower ratings are relatively rare, suggesting a positive skew in the data.
 
