@@ -133,9 +133,9 @@ Analysis: The graph shows that the recipes with ratings 3 and 4 have lower numbe
 
 This pivot table summarizes the data by grouping the "Number_of_Steps" column into bins (e.g., "0-10", "10-20", etc.) and calculating aggregate statistics for each bin. Here's the significance of each column:
 
-**Average_Rating_Mean**: Shows the average rating for each step range, providing insight into how ratings vary across different activity levels.
-**Count**: Indicates the number of entries (or observations) in each bin, reflecting the distribution of data across step ranges.
-**Rating_StdDev**: Displays the standard deviation of ratings within each bin, highlighting the variability or consistency of ratings for a given step range.
+- **Average_Rating_Mean**: Shows the average rating for each step range, providing insight into how ratings vary across different activity levels.
+- **Count**: Indicates the number of entries (or observations) in each bin, reflecting the distribution of data across step ranges.
+- **Rating_StdDev**: Displays the standard deviation of ratings within each bin, highlighting the variability or consistency of ratings for a given step range.
 
-This table allows you to analyze trends and relationships between step levels and ratings, such as whether higher step counts are associated with better ratings and if certain bins have more consistent feedback.
+- This table allows you to analyze trends and relationships between step levels and ratings, such as whether higher step counts are associated with better ratings and if certain bins have more consistent feedback.
 
