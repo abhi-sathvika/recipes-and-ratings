@@ -139,3 +139,10 @@ This pivot table summarizes the data by grouping the "Number_of_Steps" column in
 
 This table shows the relationships between step levels and ratings, such as whether higher step counts are associated with better ratings and if certain bins have more consistent feedback.
 
+
+
+## Assessment of Missingness
+
+- ‘Rating’ is a column that is Not Missing At Random (NMAR). This is because if people felt really strongly about a specific recipe, they are more likely to report their rating. On the other hand, if people do not have a strong opinion about a recipe, they are more likely to not share their rating. Therefore, the rating column is dependent on its own value. 
+- Additional data that we can collect to make the missingness of ‘rating’ MAR is the popularity of the recipe. For example, we can collect the number of views for that recipe. The higher the number of views, the more likely people have tried and rated a recipe and vice versa. Therefore, the missingness of ‘rating” is dependent on an entirely different column, “popularity of recipe”.
+
