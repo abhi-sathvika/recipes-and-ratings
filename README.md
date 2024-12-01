@@ -306,4 +306,31 @@ Conclusion
 - In summary, the Random Forest Classifier with feature engineering and hyperparameter optimization performed significantly better than the baseline Linear Regression model. The additional features, transformations, and careful tuning of hyperparameters helped the model capture the underlying patterns in the data more effectively, leading to improved performance. The use of GridSearchCV to optimize the model's parameters ensured that we were using the best possible configuration for the given data.
 
 
+
+## Fairness Analysis
+
+- In this fairness analysis, we want to examine whether our model performs differently for two groups in our dataset. The groups we will compare are based on the number of steps taken, which may represent physical activity levels, potentially influencing the rating (rating_x) given to the items in the dataset.
+
+Group Definition
+- Group X: Recipes which have fewer steps (n_steps < median).
+- Group Y: Recipes which have more steps (n_steps >= median).
   
+- The choice of this grouping is based on the assumption that recipes with more steps might be rated differently than those with lower number of steps. For instance, the amount of effort a recipe requires could correlate with different preferences, which we want to examine in terms of fairness.
+
+Evaluation Metric
+- We will use accuracy as our evaluation metric. Since the target variable rating_x is categorical and we are working with a classification model, accuracy is an appropriate metric to compare across different groups. Accuracy represents the proportion of correct predictions, and a lower accuracy for one group would suggest that the model is unfairly biased against that group.
+
+Hypotheses
+- Null Hypothesis (H₀): The model performs equally for both groups (Group X and Group Y). Any differences in accuracy between these two groups are due to random chance.
+  
+- Alternative Hypothesis (H₁): The model performs differently for the two groups. Specifically, we hypothesize that the model's accuracy is significantly lower for Group X (fewer steps) compared to Group Y (more steps).
+  
+Test Statistic
+- Our test statistic will be the difference in accuracy between Group X and Group Y. We will use a permutation test to determine whether the observed difference in accuracy is statistically significant.
+
+Significance Level
+- We will use a significance level of α = 0.05. If the p-value is less than 0.05, we will reject the null hypothesis, indicating that there is a significant difference in the model's performance between the two groups.
+
+**Conclusion**
+- P-value: 0.844
+- Since 0.844 > 0.05, we fail to reject the null hypothesis. The model's accuracy does not differ significantly between Group X, recipes which have fewer steps and Group Y, recipes which have more steps.
