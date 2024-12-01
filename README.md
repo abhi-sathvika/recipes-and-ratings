@@ -195,3 +195,115 @@ This table shows the relationships between step levels and ratings, such as whet
 
 
 ## Framing a Prediction Problem 
+Prediction Problem and Type:
+- The prediction problem is multiclass classification. We are building a model to predict a categorical variable (rating_x), which represents a rating on a scale (e.g., 1 to 5). This makes the problem a multiclass classification task because there are more than two possible classes (ratings 1 through 5).
+
+Response Variable:
+- The response variable (i.e., the variable being predicted) is rating_x. This variable represents a rating on a scale, such as user ratings for a product, which can take values from 1 to 5.
+
+- We chose rating_x as the response variable because it represents the outcome we want to predict based on the features n_steps and minutes. These features could correspond to data such as steps taken and time spent on an activity, and we want to predict how that activity is rated. This is a typical use case for predicting user ratings based on quantitative metrics.
+
+#### NOTE: 
+
+- Initially, we were considering a regression model for predicting the response variable, rating_x, which represented a continuous numerical value. However, upon further analysis, we realized that the nature of the problem aligns more with a multiclass classification approach rather than regression. This is because the response variable, rating_x, represents categorical ratings (such as ratings from 1 to 5), which are distinct classes rather than continuous values.
+
+- As a result, we transitioned from a regression model to a Random Forest Classifier, which is better suited for predicting categorical outcomes. A classifier is ideal for this problem, as it directly handles the discrete nature of the target variable, and our goal is to predict one of several possible categories (ratings 1 through 5) based on the input features.
+
+Alteration of the Response Variable:
+
+- In the regression setup, rating_x was treated as a continuous numerical variable. In contrast, with the switch to a classification approach, rating_x is now treated as a categorical variable with distinct class labels corresponding to the different ratings. This change aligns better with the problem’s structure, where the ratings are not continuous but represent distinct levels of evaluation.
+
+Evaluation Metric:
+- The metric used to evaluate the model is accuracy. We chose accuracy because it is a simple and interpretable metric that measures the proportion of correct predictions out of all predictions made. With the shift to classification, accuracy is a natural fit for multiclass classification tasks as it measures the proportion of correct predictions relative to the total number of predictions. Since the problem now involves predicting one of several discrete classes, accuracy provides a straightforward measure of the model's overall performance.
+
+
+## Baseline Model 
+
+Model Type:
+- The model we are using is a Linear Regression model. This model aims to predict a continuous numerical target variable, specifically the variable avg_rating, based on the input features n_steps and minutes. 
+
+Features in the Model:
+
+- n_steps (Quantitative): This is a quantitative feature representing the number of steps taken during an activity. It is a continuous numerical variable.
+
+- minutes (Quantitative): This is another quantitative feature representing the number of minutes spent on the activity. It is also a continuous numerical variable.
+
+- There are no ordinal or nominal features in the current model. Both features are quantitative, meaning they are continuous and represent measurable quantities. Since these are numerical features, no encoding (such as one-hot encoding or label encoding) is necessary.
+
+Model Fitting:
+- The model is trained using Linear Regression. The process involves:
+
+Training Data: We split the dataset into training and test sets using a 80-20 split. The model is trained on the training data using the features n_steps and minutes to predict the target variable avg_rating.
+
+Test Data: After training, the model is used to predict the ratings for the test set, and we evaluate the model's performance using appropriate metrics.
+
+Performance Metrics:
+"Accuracy-like" Metric for Regression: We calculated an "accuracy-like" metric, which checks whether the model’s predictions are within a ±7.5% margin of the true values. This metric gives us a sense of how often the model's predictions are sufficiently close to the actual ratings. The purpose of calculating this "accuracy-like" metric is so that we can clearly compare the performance of this linear regression model with the performance of the final classification model. 
+
+Model Evaluation:
+Test RMSE: 0.627 
+- This value represents the model's performance on unseen data (test set). The value of 0.627 is a relatively high RMSE, indicating the baseline is not able to identify the underlying patterns of the dataset.
+
+Accuracy-like Metric: 0.635
+- This value represents the proportion of values that the model was able to correctly predict within a range of 0.075 from the true value. Again, to reiterate the purpose of this metric, it is to allow us to compare the baseline regression model to the final classification model. 
+
+- The value of 0.635 is good, but could be better. Right now, the model is not able to predict 36.5% of the data points correctly within 0.075 of the true value. Although this is a good starting point, this metric could definitely improve!
+
+
+
+## Final Model 
+
+In the final model, we made several additions to the feature set, which were designed to improve the model’s performance based on the context of the data generating process:
+
+Nutrition Features:
+
+- Calories, Sugar: These features were extracted from the nutrition column, which originally contained a list of nutritional values for each record. By separating out specific nutrients (e.g., calories, sugar), we introduce more specific and interpretable features into the model. We think that calories and sugar improved our model's performance as it has a direct influence on recipe ratings. For example, people tend to give recipes with more calories and sugar a higher rating as the recipe might taste better than a healthier alternative.
+  
+Fat, Protein, Sodium, Carbs, Fiber: These additional nutrition-related features can potentially add value by offering a more comprehensive understanding of the data. For the final model, we focused on a subset of these (calories and sugar) for simplicity and interpretability.
+
+Minutes and N_steps:
+
+- We think that minutes and n_steps improved our model's performance as it has a direct influence on recipe ratings. For example, recipes that take longer to prepare might have a lower rating as people prefer and quick and easy recipes. Similarly, this pattern applies to the number of steps a recipe has as well, with more stepped recipes receiving lower ratings. 
+
+- Log Transformation: The minutes feature was log-transformed using FunctionTransformer(np.log1p). This transformation helps handle skewness in the data where the original distribution of minutes might have outliers or heavy tails. 
+  
+- Justification: Log transformation is commonly used for skewed data because it reduces the impact of extreme values, making the model more stable and improving its predictive accuracy. In this case, long-duration activities may have disproportionate effects on the target variable, and applying the log transformation makes the data more normally distributed.
+
+Scaling of Features:
+
+- Standard Scaling: Quantitative features such as n_steps, calories, and sugar were standardized using StandardScaler to have zero mean and unit variance.
+
+- Justification: Feature scaling helps ensure that all features contribute equally to the model, especially when using distance-based algorithms. Standardizing the features prevents one feature with a larger range from dominating others and thus improves model performance.
+
+Model Description
+
+- For the final model, we chose a Random Forest Classifier, an ensemble learning method that uses multiple decision trees to make predictions. The model aggregates the predictions from several trees to improve accuracy and reduce overfitting. Random forests are robust, handle non-linear relationships well, and provide feature importance, which can be useful for interpretation.
+
+Hyperparameter Tuning:
+- We used GridSearchCV to tune the hyperparameters of the Random Forest model, and found the best combination of parameters that maximized the model’s performance. We did 3 fold cross-validations during our GridSearchCV. The following hyperparameters were optimized:
+
+- n_estimators: 100 
+- max_depth: 30
+- min_samples_split: 2
+- min_samples_leaf: 1 
+- max_features: 'sqrt'
+
+
+Final Model Performance
+
+- Accuracy: The overall accuracy score was printed using accuracy_score, showing the proportion of correct predictions on the test set. The accuracy for our final model is 0.731, which is a 10% increase in accuracy, indicating a great improvement from baseline model.
+  
+Improvement Over Baseline Model:
+
+- Better Handling of Non-Linearity: Unlike Linear Regression, which assumes a linear relationship between features and the target, Random Forest can capture non-linear relationships between the features and the target. This makes it a better fit for more complex datasets like this one.
+
+- Feature Engineering: The addition of nutrition-related features and the transformation of the minutes feature likely contributed to a better understanding of the data, allowing the Random Forest model to make more informed predictions.
+
+- Hyperparameter Tuning: By fine-tuning the Random Forest hyperparameters, we were able to improve the model's generalization and accuracy, making it more suitable for the prediction task.
+
+
+Conclusion
+- In summary, the Random Forest Classifier with feature engineering and hyperparameter optimization performed significantly better than the baseline Linear Regression model. The additional features, transformations, and careful tuning of hyperparameters helped the model capture the underlying patterns in the data more effectively, leading to improved performance. The use of GridSearchCV to optimize the model's parameters ensured that we were using the best possible configuration for the given data.
+
+
+  
