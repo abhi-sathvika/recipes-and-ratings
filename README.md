@@ -7,7 +7,7 @@ The dataset being analyzed contains detailed information about recipes from a po
 
 ### Project Focus:
 Our project focuses on answering this central question:
-**"What is the relationship between the number of steps in a recipe and its average user rating?"**
+**"What is the relationship between the number of steps in a recipe and its rating?"**
 This question is intriguing because it sheds light on how complexity in recipe preparation might influence user satisfaction. Does a simple recipe garner more favorable reviews, or do users appreciate the effort and detail of a complex recipe? Answering this can benefit chefs, culinary websites, and anyone looking to optimize recipe creation for higher ratings.
 
 ### Why It Matters
@@ -20,7 +20,7 @@ For our analysis, we used two datasets, recipes and interactions.
 
 Relevant columns:
 - n_steps: The number of steps required to prepare the recipe. This reflects the recipe's complexity.
-- avg_rating: The average user rating of the recipe, a measure of its popularity and perceived quality.
+- rating_x: The user rating of the recipe, a measure of its popularity and perceived quality.
 - minutes: The total preparation time for the recipe, providing context to its complexity.
 
 ### Datasets Used
@@ -205,22 +205,16 @@ Response Variable:
 
 #### NOTE: 
 
-- Initially, we were considering a regression model for predicting the response variable, rating_x, which represented a continuous numerical value. However, upon further analysis, we realized that the nature of the problem aligns more with a multiclass classification approach rather than regression. This is because the response variable, rating_x, represents categorical ratings (such as ratings from 1 to 5), which are distinct classes rather than continuous values.
-
-- As a result, we transitioned from a regression model to a Random Forest Classifier, which is better suited for predicting categorical outcomes. A classifier is ideal for this problem, as it directly handles the discrete nature of the target variable, and our goal is to predict one of several possible categories (ratings 1 through 5) based on the input features.
-
-Alteration of the Response Variable:
-
-- In the regression setup, rating_x was treated as a continuous numerical variable. In contrast, with the switch to a classification approach, rating_x is now treated as a categorical variable with distinct class labels corresponding to the different ratings. This change aligns better with the problem’s structure, where the ratings are not continuous but represent distinct levels of evaluation.
+- We transitioned from a KNN classifier to a Random Forest Classifier, which is better suited for predicting categorical outcomes.
 
 Evaluation Metric:
-- The metric used to evaluate the model is accuracy. We chose accuracy because it is a simple and interpretable metric that measures the proportion of correct predictions out of all predictions made. With the shift to classification, accuracy is a natural fit for multiclass classification tasks as it measures the proportion of correct predictions relative to the total number of predictions. Since the problem now involves predicting one of several discrete classes, accuracy provides a straightforward measure of the model's overall performance.
+- The metric used to evaluate the model is accuracy. We chose accuracy because it is a simple and interpretable metric that measures the proportion of correct predictions out of all predictions made. Accuracy is a natural fit for multiclass classification tasks as it measures the proportion of correct predictions relative to the total number of predictions. Since the problem involves predicting one of several discrete classes, accuracy provides a straightforward measure of the model's overall performance.
 
 
 ## Baseline Model 
 
 Model Type:
-- The model we are using is a Linear Regression model. This model aims to predict a continuous numerical target variable, specifically the variable avg_rating, based on the input features n_steps and minutes. 
+- The model we are using is a KNN Classifier model. This model aims to predict a categorical target variable, specifically the variable rating_x, based on the input features n_steps and minutes. 
 
 Features in the Model:
 
@@ -231,23 +225,19 @@ Features in the Model:
 - There are no ordinal or nominal features in the current model. Both features are quantitative, meaning they are continuous and represent measurable quantities. Since these are numerical features, no encoding (such as one-hot encoding or label encoding) is necessary.
 
 Model Fitting:
-- The model is trained using Linear Regression. The process involves:
+- The model is trained using KNN Classifier. The process involves:
 
-Training Data: We split the dataset into training and test sets using a 80-20 split. The model is trained on the training data using the features n_steps and minutes to predict the target variable avg_rating.
+Training Data: We split the dataset into training and test sets using a 80-20 split. The model is trained on the training data using the features n_steps and minutes to predict the target variable rating_x.
 
 Test Data: After training, the model is used to predict the ratings for the test set, and we evaluate the model's performance using appropriate metrics.
 
 Performance Metrics:
-"Accuracy-like" Metric for Regression: We calculated an "accuracy-like" metric, which checks whether the model’s predictions are within a ±7.5% margin of the true values. This metric gives us a sense of how often the model's predictions are sufficiently close to the actual ratings. The purpose of calculating this "accuracy-like" metric is so that we can clearly compare the performance of this linear regression model with the performance of the final classification model. 
 
 Model Evaluation:
-Test RMSE: 0.627 
-- This value represents the model's performance on unseen data (test set). The value of 0.627 is a relatively high RMSE, indicating the baseline is not able to identify the underlying patterns of the dataset.
+Test Accuracy: 0.4729 
+- This value represents the model's performance on unseen data (test set). The value of 0.4729 is a relatively low accuracy score, indicating the baseline is not able to identify the underlying patterns of the dataset.
 
-Accuracy-like Metric: 0.635
-- This value represents the proportion of values that the model was able to correctly predict within a range of 0.075 from the true value. Again, to reiterate the purpose of this metric, it is to allow us to compare the baseline regression model to the final classification model. 
-
-- The value of 0.635 is good, but could be better. Right now, the model is not able to predict 36.5% of the data points correctly within 0.075 of the true value. Although this is a good starting point, this metric could definitely improve!
+- The value of 0.4729 is good, but could be better. Right now, the model is not able to predict 53% of the data points correctly. Although this is a good starting point, this metric could definitely improve!
 
 
 
@@ -257,7 +247,7 @@ In the final model, we made several additions to the feature set, which were des
 
 Nutrition Features:
 
-- Calories, Sugar: These features were extracted from the nutrition column, which originally contained a list of nutritional values for each record. By separating out specific nutrients (e.g., calories, sugar), we introduce more specific and interpretable features into the model. We think that calories and sugar improved our model's performance as it has a direct influence on recipe ratings. For example, people tend to give recipes with more calories and sugar a higher rating as the recipe might taste better than a healthier alternative.
+- Calories, Sugar: These features were extracted from the nutrition column, which originally contained a list of nutritional values for each record. By parsing through the nutritions column, we extracted the specific calorie and sugar values in each recipe. In the real world, calories and sugar would be considered two separate factors when people rate the recipe. Therefore, we also treated calories and sugar as two separate features that could train our model. By separating out specific nutrients (e.g., calories, sugar), we introduce more specific and interpretable features into the model. We think that calories and sugar improved our model's performance as it has a direct influence on recipe ratings. For example, people tend to give recipes with more calories and sugar a higher rating as the recipe might taste better than a healthier alternative.
   
 Fat, Protein, Sodium, Carbs, Fiber: These additional nutrition-related features can potentially add value by offering a more comprehensive understanding of the data. For the final model, we focused on a subset of these (calories and sugar) for simplicity and interpretability.
 
@@ -291,11 +281,12 @@ Hyperparameter Tuning:
 
 Final Model Performance
 
-- Accuracy: The overall accuracy score was printed using accuracy_score, showing the proportion of correct predictions on the test set. The accuracy for our final model is 0.731, which is a 10% increase in accuracy, indicating a great improvement from baseline model.
+- Accuracy: The accuracy for our final model is 0.731, which is a 26% increase in accuracy, indicating a great improvement from our baseline model.
   
 Improvement Over Baseline Model:
 
-- Better Handling of Non-Linearity: Unlike Linear Regression, which assumes a linear relationship between features and the target, Random Forest can capture non-linear relationships between the features and the target. This makes it a better fit for more complex datasets like this one.
+- Better Handling: In a KNN Classifier, a single noisy point in the dataset can significantly affect predictions because it relies directly on the closest neighbors. On the other hand, Random Forest Classifier combines multiple decision trees, each trained on a random subset of data and features, which averages out errors and reduces sensitivity to noise. This is one of the factors that might explain the drastic improvement from our baseline to our final model.
+  
 
 - Feature Engineering: The addition of nutrition-related features and the transformation of the minutes feature likely contributed to a better understanding of the data, allowing the Random Forest model to make more informed predictions.
 
@@ -303,7 +294,7 @@ Improvement Over Baseline Model:
 
 
 Conclusion
-- In summary, the Random Forest Classifier with feature engineering and hyperparameter optimization performed significantly better than the baseline Linear Regression model. The additional features, transformations, and careful tuning of hyperparameters helped the model capture the underlying patterns in the data more effectively, leading to improved performance. The use of GridSearchCV to optimize the model's parameters ensured that we were using the best possible configuration for the given data.
+- In summary, the Random Forest Classifier with feature engineering and hyperparameter optimization performed significantly better than the baseline KNN Classifier model. The additional features, transformations, and careful tuning of hyperparameters helped the model capture the underlying patterns in the data more effectively, leading to improved performance. The use of GridSearchCV to optimize the model's parameters ensured that we were using the best possible configuration for the given data.
 
 
 
